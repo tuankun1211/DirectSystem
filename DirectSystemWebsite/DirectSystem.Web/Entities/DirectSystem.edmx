@@ -1,0 +1,332 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DirectSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="tbl_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="tbl_CustomerBehavior">
+          <Key>
+            <PropertyRef Name="BehaviorID" />
+          </Key>
+          <Property Name="BehaviorID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CustomerID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SaleNumber" Type="int" />
+          <Property Name="Index_Part1" Type="int" />
+          <Property Name="Index_Part2" Type="int" />
+          <Property Name="Index_Part3" Type="int" />
+          <Property Name="Index_Part4" Type="int" />
+          <Property Name="Index_Part5" Type="int" />
+          <Property Name="Index_Part6" Type="int" />
+          <Property Name="Index_Part7" Type="int" />
+          <Property Name="Index_Part8" Type="int" />
+          <Property Name="Index_Part9" Type="int" />
+          <Property Name="Index_Part10" Type="int" />
+          <Property Name="CustomerComplaints" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="tbl_CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StoreCode" Type="varchar" MaxLength="50" />
+          <Property Name="EntryNumber" Type="int" />
+          <Property Name="ForeignNumber" Type="int" />
+          <Property Name="AgeGroup1" Type="int" />
+          <Property Name="AgeGroup2" Type="int" />
+          <Property Name="AgeGroup3" Type="int" />
+          <Property Name="GenderMale" Type="int" />
+          <Property Name="GenderFemale" Type="int" />
+          <Property Name="Index_Pathway1" Type="int" />
+          <Property Name="Index_Pathway2" Type="int" />
+          <Property Name="Index_Pathway3" Type="int" />
+          <Property Name="ShifName" Type="varchar" MaxLength="50" />
+          <Property Name="CustomerCode" Type="varchar" MaxLength="50" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="varchar" MaxLength="50" />
+          <Property Name="PostDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EmpCode" Type="varchar" MaxLength="50" />
+          <Property Name="ShifName" Type="varchar" MaxLength="50" />
+          <Property Name="AbsenceInShif" Type="int" />
+          <Property Name="OnPhone" Type="int" />
+          <Property Name="Chatting" Type="int" />
+          <Property Name="UseComputer" Type="int" />
+          <Property Name="SlowRepresentative" Type="int" />
+          <Property Name="CustomerComplaint" Type="int" />
+          <Property Name="CreateDate" Type="datetime" />
+          <Property Name="CreateBy" Type="datetime" />
+          <Property Name="PostDate" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_tbl_CustomerBehavior_tbl_CustomerInfo">
+          <End Role="tbl_CustomerInfo" Type="Self.tbl_CustomerInfo" Multiplicity="1" />
+          <End Role="tbl_CustomerBehavior" Type="Self.tbl_CustomerBehavior" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CustomerInfo">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_CustomerBehavior">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DirectSystemModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_CustomerBehavior" EntityType="Self.tbl_CustomerBehavior" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_CustomerInfo" EntityType="Self.tbl_CustomerInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_CustomerBehavior_tbl_CustomerInfo" Association="Self.FK_tbl_CustomerBehavior_tbl_CustomerInfo">
+            <End Role="tbl_CustomerInfo" EntitySet="tbl_CustomerInfo" />
+            <End Role="tbl_CustomerBehavior" EntitySet="tbl_CustomerBehavior" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DirectSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="tbl_Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="tbl_CustomerBehavior">
+          <Key>
+            <PropertyRef Name="BehaviorID" />
+          </Key>
+          <Property Name="BehaviorID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CustomerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SaleNumber" Type="Int32" />
+          <Property Name="Index_Part1" Type="Int32" />
+          <Property Name="Index_Part2" Type="Int32" />
+          <Property Name="Index_Part3" Type="Int32" />
+          <Property Name="Index_Part4" Type="Int32" />
+          <Property Name="Index_Part5" Type="Int32" />
+          <Property Name="Index_Part6" Type="Int32" />
+          <Property Name="Index_Part7" Type="Int32" />
+          <Property Name="Index_Part8" Type="Int32" />
+          <Property Name="Index_Part9" Type="Int32" />
+          <Property Name="Index_Part10" Type="Int32" />
+          <Property Name="CustomerComplaints" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_CustomerInfo" Relationship="Self.FK_tbl_CustomerBehavior_tbl_CustomerInfo" FromRole="tbl_CustomerBehavior" ToRole="tbl_CustomerInfo" />
+        </EntityType>
+        <EntityType Name="tbl_CustomerInfo">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StoreCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EntryNumber" Type="Int32" />
+          <Property Name="ForeignNumber" Type="Int32" />
+          <Property Name="AgeGroup1" Type="Int32" />
+          <Property Name="AgeGroup2" Type="Int32" />
+          <Property Name="AgeGroup3" Type="Int32" />
+          <Property Name="GenderMale" Type="Int32" />
+          <Property Name="GenderFemale" Type="Int32" />
+          <Property Name="Index_Pathway1" Type="Int32" />
+          <Property Name="Index_Pathway2" Type="Int32" />
+          <Property Name="Index_Pathway3" Type="Int32" />
+          <Property Name="ShifName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CustomerCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_CustomerBehavior" Relationship="Self.FK_tbl_CustomerBehavior_tbl_CustomerInfo" FromRole="tbl_CustomerInfo" ToRole="tbl_CustomerBehavior" />
+        </EntityType>
+        <EntityType Name="tbl_Employee">
+          <Key>
+            <PropertyRef Name="EmpID" />
+          </Key>
+          <Property Name="EmpID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="EmpCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ShifName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AbsenceInShif" Type="Int32" />
+          <Property Name="OnPhone" Type="Int32" />
+          <Property Name="Chatting" Type="Int32" />
+          <Property Name="UseComputer" Type="Int32" />
+          <Property Name="SlowRepresentative" Type="Int32" />
+          <Property Name="CustomerComplaint" Type="Int32" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateBy" Type="DateTime" Precision="3" />
+          <Property Name="PostDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <Association Name="FK_tbl_CustomerBehavior_tbl_CustomerInfo">
+          <End Role="tbl_CustomerInfo" Type="Self.tbl_CustomerInfo" Multiplicity="1" />
+          <End Role="tbl_CustomerBehavior" Type="Self.tbl_CustomerBehavior" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_CustomerInfo">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="tbl_CustomerBehavior">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DirectSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="tbl_Account" EntityType="Self.tbl_Account" />
+          <EntitySet Name="tbl_CustomerBehavior" EntityType="Self.tbl_CustomerBehavior" />
+          <EntitySet Name="tbl_CustomerInfo" EntityType="Self.tbl_CustomerInfo" />
+          <EntitySet Name="tbl_Employee" EntityType="Self.tbl_Employee" />
+          <AssociationSet Name="FK_tbl_CustomerBehavior_tbl_CustomerInfo" Association="Self.FK_tbl_CustomerBehavior_tbl_CustomerInfo">
+            <End Role="tbl_CustomerInfo" EntitySet="tbl_CustomerInfo" />
+            <End Role="tbl_CustomerBehavior" EntitySet="tbl_CustomerBehavior" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DirectSystemModelStoreContainer" CdmEntityContainer="DirectSystemEntities">
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="DirectSystemModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Account">
+            <EntityTypeMapping TypeName="DirectSystemModel.tbl_Account">
+              <MappingFragment StoreEntitySet="tbl_Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CustomerBehavior">
+            <EntityTypeMapping TypeName="DirectSystemModel.tbl_CustomerBehavior">
+              <MappingFragment StoreEntitySet="tbl_CustomerBehavior">
+                <ScalarProperty Name="BehaviorID" ColumnName="BehaviorID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="SaleNumber" ColumnName="SaleNumber" />
+                <ScalarProperty Name="Index_Part1" ColumnName="Index_Part1" />
+                <ScalarProperty Name="Index_Part2" ColumnName="Index_Part2" />
+                <ScalarProperty Name="Index_Part3" ColumnName="Index_Part3" />
+                <ScalarProperty Name="Index_Part4" ColumnName="Index_Part4" />
+                <ScalarProperty Name="Index_Part5" ColumnName="Index_Part5" />
+                <ScalarProperty Name="Index_Part6" ColumnName="Index_Part6" />
+                <ScalarProperty Name="Index_Part7" ColumnName="Index_Part7" />
+                <ScalarProperty Name="Index_Part8" ColumnName="Index_Part8" />
+                <ScalarProperty Name="Index_Part9" ColumnName="Index_Part9" />
+                <ScalarProperty Name="Index_Part10" ColumnName="Index_Part10" />
+                <ScalarProperty Name="CustomerComplaints" ColumnName="CustomerComplaints" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_CustomerInfo">
+            <EntityTypeMapping TypeName="DirectSystemModel.tbl_CustomerInfo">
+              <MappingFragment StoreEntitySet="tbl_CustomerInfo">
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="StoreCode" ColumnName="StoreCode" />
+                <ScalarProperty Name="EntryNumber" ColumnName="EntryNumber" />
+                <ScalarProperty Name="ForeignNumber" ColumnName="ForeignNumber" />
+                <ScalarProperty Name="AgeGroup1" ColumnName="AgeGroup1" />
+                <ScalarProperty Name="AgeGroup2" ColumnName="AgeGroup2" />
+                <ScalarProperty Name="AgeGroup3" ColumnName="AgeGroup3" />
+                <ScalarProperty Name="GenderMale" ColumnName="GenderMale" />
+                <ScalarProperty Name="GenderFemale" ColumnName="GenderFemale" />
+                <ScalarProperty Name="Index_Pathway1" ColumnName="Index_Pathway1" />
+                <ScalarProperty Name="Index_Pathway2" ColumnName="Index_Pathway2" />
+                <ScalarProperty Name="Index_Pathway3" ColumnName="Index_Pathway3" />
+                <ScalarProperty Name="ShifName" ColumnName="ShifName" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Employee">
+            <EntityTypeMapping TypeName="DirectSystemModel.tbl_Employee">
+              <MappingFragment StoreEntitySet="tbl_Employee">
+                <ScalarProperty Name="EmpID" ColumnName="EmpID" />
+                <ScalarProperty Name="EmpCode" ColumnName="EmpCode" />
+                <ScalarProperty Name="ShifName" ColumnName="ShifName" />
+                <ScalarProperty Name="AbsenceInShif" ColumnName="AbsenceInShif" />
+                <ScalarProperty Name="OnPhone" ColumnName="OnPhone" />
+                <ScalarProperty Name="Chatting" ColumnName="Chatting" />
+                <ScalarProperty Name="UseComputer" ColumnName="UseComputer" />
+                <ScalarProperty Name="SlowRepresentative" ColumnName="SlowRepresentative" />
+                <ScalarProperty Name="CustomerComplaint" ColumnName="CustomerComplaint" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="CreateBy" ColumnName="CreateBy" />
+                <ScalarProperty Name="PostDate" ColumnName="PostDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
